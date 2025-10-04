@@ -3,8 +3,15 @@ from models.Tarea import Tarea
 tareas = []
 
 def crear(tarea:Tarea):
-    nueva_tarea = dict(tarea)
-    nueva_tarea["id"] = len(tareas) + 1
-    tareas.append(nueva_tarea)
+    try:
+        nueva_tarea = tarea.dict()
+        nueva_tarea["id"] = len(tareas) + 1
+        guardar_tarea(nueva_tarea)
+        return {"mensaje": "Tarea creada", "tarea": nueva_tarea}
+    except Exception as e:
+        return {"status": "Error", "menssage": e}
 
-    return {"mensaje": "Tarea creada", "tarea": nueva_tarea}
+def guardar_tarea(tarea):
+
+    tareas.append(tarea)
+    return True
