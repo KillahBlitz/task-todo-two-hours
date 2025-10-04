@@ -1,15 +1,7 @@
-from fastapi import APIRouter
-from pydantic import BaseModel
-
-ruta_crear_tareas = APIRouter()
+from models.Tarea import Tarea
 
 tareas = []
 
-class Tarea(BaseModel):
-    titulo: str
-    descripcion: str = ""
-
-@ruta_crear_tareas.post("/crear_tarea/")
 def crear(tarea:Tarea):
     nueva_tarea = dict(tarea)
     nueva_tarea["id"] = len(tareas) + 1
