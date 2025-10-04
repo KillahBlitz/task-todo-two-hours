@@ -7,7 +7,7 @@ def crear(tarea:dict):
         tarea["id"] = len(tareas) + 1
         tarea = Tarea(**tarea)
         if guardar_tarea(tarea):
-            return {"status": "success", "tarea": tarea}
+            return {"status": "success", "tareas": tareas}
         else:
             return {"status": "Error", "menssage": "No se pudo guardar la tarea"}
     except Exception as e:
