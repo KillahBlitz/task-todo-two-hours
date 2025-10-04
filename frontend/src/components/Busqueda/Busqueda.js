@@ -14,9 +14,13 @@ export default async function fetchData(tarea, descripcion) {
       },
       body: body
     });
+    if (response.status === "error") {
+      alert("Error al crear la tarea");
+    }
     const data = await response.json();
-    console.log(data);
+    return data;
   } catch (error) {
-    console.error('There has been a problem with your fetch operation:', error);
+    console.error('error grave al crear tarea', error);
+    alert("Error al crear la tarea");
   }
 }
