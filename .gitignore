@@ -1,3 +1,11 @@
+#BACKEND
+__pycache__/
+.venv/
+
+
+
+
+#FRONTEND
 # Logs
 logs
 *.log
