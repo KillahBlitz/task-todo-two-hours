@@ -15,7 +15,7 @@ const actualizarTareas = (nuevasTareas) => {
   <div>
     <Header/>
     <Busqueda @actualizar-tareas="actualizarTareas"/>
-    <Tareas :tareas="listaTareas"/>
+    <Tareas v-model:tareas="listaTareas"/>
   </div>
 </template>
 

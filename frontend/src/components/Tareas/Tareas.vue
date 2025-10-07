@@ -1,15 +1,24 @@
 <script setup>
 import eliminarTaskFinal from './Tareas';
 import './Tareas.css';
-const props = defineProps({
+
+defineProps({
   tareas: {
-    type: Object,
-    required: true
+    type: Array,
+    required: true,
+    default: () => []
   }
 });
 
-function eliminarTask(id){
-  eliminarTaskFinal(id);
+const emit = defineEmits(['update:tareas']);
+
+async function eliminarTask(event, id) {
+  try {
+    const tareasActualizadas = await eliminarTaskFinal(id);
+    emit('update:tareas', tareasActualizadas);
+  } catch (error) {
+    console.error('Error al eliminar tarea:', error);
+  }
 }
 </script>
 
@@ -25,7 +34,7 @@ function eliminarTask(id){
               {{ tarea.descripcion }}
             </div>
             <div class="boton-eliminar">
-              <button @click=eliminarTask(tarea.id)>Eliminar</button>
+              <button @click="(event) => eliminarTask(event, tarea.id)">Eliminar</button>
             </div>
           </div>
         </div>

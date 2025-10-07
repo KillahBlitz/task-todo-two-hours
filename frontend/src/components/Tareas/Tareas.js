@@ -3,5 +3,5 @@ export default async function eliminarTaskFinal(id) {
         method: 'DELETE',
     });
     const data = await response.json();
-    console.log(data);
+    return data.tareas;
 }

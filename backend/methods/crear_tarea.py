@@ -19,3 +19,6 @@ def guardar_tarea(tarea):
         return True
     except Exception as e:
         return False
+
+def obtener_tareas():
+    return tareas
