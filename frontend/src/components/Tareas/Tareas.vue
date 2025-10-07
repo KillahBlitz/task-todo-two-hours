@@ -1,4 +1,5 @@
 <script setup>
+import eliminarTaskFinal from './Tareas';
 import './Tareas.css';
 const props = defineProps({
   tareas: {
@@ -6,6 +7,10 @@ const props = defineProps({
     required: true
   }
 });
+
+function eliminarTask(id){
+  eliminarTaskFinal(id);
+}
 </script>
 
 <template>
@@ -20,7 +25,7 @@ const props = defineProps({
               {{ tarea.descripcion }}
             </div>
             <div class="boton-eliminar">
-              <button @click="$emit('eliminar-tarea', tarea.id)">Eliminar</button>
+              <button @click=eliminarTask(tarea.id)>Eliminar</button>
             </div>
           </div>
         </div>
