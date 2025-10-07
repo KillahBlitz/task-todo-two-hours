@@ -1,22 +1,34 @@
 <script setup>
 import './Busqueda.css';
 import fetchData from './Busqueda.js';
+import { ref } from 'vue';
 
-const handleClick = () => {
-  // recuperar los valores de los inputs
-  const task = document.querySelector('.Task').value;
-  const description = document.querySelector('.descripcion').value;
-  fetchData(task, description);
-  document.querySelector('.Task').value = '';
-  document.querySelector('.descripcion').value = '';
+const task = ref('');
+const description = ref('');
+
+const emit = defineEmits(['actualizar-tareas']);
+
+const handleClick = async () => {
+  try {
+    if (!task.value || !description.value) {
+      alert('Por favor, completa ambos campos antes de agregar una tarea.');
+      return;
+    }
+    const tareas = await fetchData(task.value, description.value);
+    emit('actualizar-tareas', tareas.tareas);
+    task.value = '';
+    description.value = '';
+  } catch (error) {
+    console.error('Error al crear la tarea:', error);
+  }
 };
 </script>
 
 <template>
   <div class="search-bar">
-    <input class="Task" type="text" placeholder="Crear tarea..." />
-    <input class="descripcion" type="text" placeholder="Descripcion..." />
-    <button class="boton" @click="handleClick">Buscar</button>
+    <input v-model="task" class="Task" type="text" placeholder="Crear tarea..." />
+    <input v-model="description" class="descripcion" type="text" placeholder="Descripcion..." />
+    <button class="boton" @click="handleClick">Agregar</button>
   </div>
 </template>
 
